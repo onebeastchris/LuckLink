@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+}
+
+group 'net.onebeastchris.extension'
+version '1.0.0'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {
+        url 'https://repo.opencollab.dev/main/'
+    }
+}
+
+dependencies {
+    compileOnly 'org.geysermc.geyser:api:2.2.1-SNAPSHOT'
+
+    compileOnly 'net.luckperms:api:5.4'
+}
+
+test {
+    useJUnitPlatform()
+}
