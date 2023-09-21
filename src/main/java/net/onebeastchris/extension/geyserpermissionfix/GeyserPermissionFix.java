@@ -1,5 +1,6 @@
 package net.onebeastchris.extension.geyserpermissionfix;
 
+import org.geysermc.event.bus.BaseBus;
 import org.geysermc.event.subscribe.Subscribe;
 import org.geysermc.geyser.api.event.lifecycle.GeyserPostInitializeEvent;
 import org.geysermc.geyser.api.event.lifecycle.GeyserPreInitializeEvent;
@@ -35,6 +36,9 @@ public class GeyserPermissionFix implements Extension {
 
     @Subscribe
     public void onPostInit(GeyserPostInitializeEvent event) {
-        this.geyserApi().eventBus().fire(new GeyserRegisterPermissionsEventImpl());
+        // Doesnt work, thorws a method not found :/
+        //this.geyserApi().eventBus().fire(new GeyserRegisterPermissionsEventImpl());
+
+        ((BaseBus) this.geyserApi().eventBus()).fire(new GeyserRegisterPermissionsEventImpl());
     }
 }

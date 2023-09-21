@@ -21,17 +21,18 @@ public class GeyserRegisterPermissionsEventImpl implements GeyserRegisterPermiss
     @Override
     public void register(String permission, TriState defaultValue) {
         PermissionNode.Builder node = PermissionNode
-                .builder(permission);
-
-        if (defaultValue.toBoolean() != null) {
-            node.value(defaultValue.toBoolean());
-        }
+                .builder(permission)
+                .value(Boolean.TRUE.equals(defaultValue.toBoolean()));
 
         Group group = luckperms.getGroupManager().getGroup("default");
         if (group != null) {
             DataMutateResult result = group.data().add(node.build());
             if (!result.wasSuccessful()) {
-                logger.warning("Failed to register permission " + permission + " for group default! : " + result.name());
+                if (result.equals(DataMutateResult.FAIL_ALREADY_HAS)) {
+                    // Permission already exists, no need to log
+                    return;
+                }
+                logger.warning("Failed to register permission " + permission + " for default group due to " + result.name() + " !");
             }
             luckperms.getGroupManager().saveGroup(group);
         }
