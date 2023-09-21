@@ -1,6 +1,6 @@
-id: geyserpermissionfix
-name: GeyserPermissionFix
-main: net.onebeastchris.extension.geyserpermissionfix.GeyserPermissionFix
+id: lucklink
+name: LuckLink
+main: net.onebeastchris.extension.lucklink.LuckLink
 api: 1.0.0
 version: 1.0.0
 authors: [onebeastchris]
