@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group 'net.onebeastchris.extension'
@@ -14,10 +15,29 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'org.geysermc.geyser:api:2.2.1-SNAPSHOT'
+    compileOnly 'org.projectlombok:lombok:1.18.26'
+    compileOnly 'org.geysermc.geyser:api:2.3.0-SNAPSHOT'
+
+    // Necessary to properly use event firing; Geyser API currently includes 1.0. 1.1 changes firing behavior.
+    compileOnly 'org.geysermc.event:events:1.1-SNAPSHOT'
     compileOnly 'net.luckperms:api:5.4'
+
+    implementation('org.spongepowered:configurate-hocon:4.1.2')
 }
 
 test {
     useJUnitPlatform()
+}
+
+jar {
+    archiveClassifier.set("unshaded")
+}
+
+shadowJar {
+    archiveBaseName.set('LuckLink')
+    archiveClassifier.set('')
+
+    relocate 'org.spongepowered.configurate', 'net.onebeastchris.extension.lucklink.configurate'
+    relocate 'io.leangen.geantyref', 'net.onebeastchris.extension.lucklink.geantyref'
+    relocate 'com.typesafe.config', 'net.onebeastchris.extension.lucklink.typesafe.config'
 }

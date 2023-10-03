@@ -18,7 +18,7 @@ public class GeyserRegisterPermissionsEventImpl implements GeyserRegisterPermiss
 
     public GeyserRegisterPermissionsEventImpl() {
         this.luckperms = LuckPermsProvider.get();
-        this.group = luckperms.getGroupManager().getGroup("default");
+        this.group = luckperms.getGroupManager().getGroup(ConfigLoader.config.getDefaultGroup());
         if (group == null) {
             logger.warning("Unable to find the default group to add permissions!");
         }
@@ -30,15 +30,22 @@ public class GeyserRegisterPermissionsEventImpl implements GeyserRegisterPermiss
         // Safety net in case no default group is found. Should never occur.
         if (group == null) return;
 
-        // Do not register unset permissions
-        if (defaultValue.toBoolean() == null) {
-            return;
+        if (ConfigLoader.config.isDebug()) {
+            logger.info("[Debug] Registering permission " + permission + " with default value " + defaultValue.name() + " for group " + group.getName());
+        }
+
+        if (defaultValue.equals(TriState.NOT_SET)) {
+            if (ConfigLoader.config.isAddUnsetPermissions()) {
+                defaultValue = TriState.FALSE;
+            } else {
+                return;
+            }
         }
 
         // Create the permission node
         PermissionNode node = PermissionNode
                 .builder(permission)
-                .value(defaultValue.toBoolean())
+                .value(Boolean.TRUE.equals(defaultValue.toBoolean()))
                 .build();
 
         // Check if the permission is already set
