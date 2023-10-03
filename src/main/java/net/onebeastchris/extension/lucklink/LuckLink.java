@@ -37,6 +37,14 @@ public class LuckLink implements Extension {
             disable();
         }
 
+        // Check: Is Geyser updated?
+        try {
+            Class.forName("org.geysermc.geyser.api.event.lifecycle.GeyserRegisterPermissionsEvent");
+        } catch (ClassNotFoundException e) {
+            logger().error("Geyser is not updated! Disabling LuckLink.");
+            disable();
+        }
+
         // Load config
         ConfigLoader.load(this);
 
