@@ -1,6 +1,5 @@
 package net.onebeastchris.extension.lucklink;
 
-import lombok.Getter;
 import org.geysermc.geyser.api.extension.Extension;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.ConfigurateException;
@@ -36,8 +35,6 @@ public class ConfigLoader {
         } catch (ConfigurateException e) {
             extension.logger().severe("Could not load config!");
             e.printStackTrace();
-            return;
         }
-        extension.logger().info("Loaded config!");
     }
 }

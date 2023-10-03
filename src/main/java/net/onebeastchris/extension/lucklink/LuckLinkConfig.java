@@ -30,10 +30,7 @@ public final class LuckLinkConfig {
     private boolean debug = false;
 
     public String getDefaultGroup() {
-        if (defaultGroup.equals("default") || defaultGroup.equals("")) {
-            return "default";
-        }
-        return "group." + defaultGroup;
+        return defaultGroup;
     }
 
     public boolean isAddUnsetPermissions() {
