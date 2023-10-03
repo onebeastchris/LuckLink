@@ -97,6 +97,7 @@ public class LuckLink implements Extension {
                 .executableOnConsole(true)
                 .bedrockOnly(false)
                 .source(CommandSource.class)
+                .permission("lucklink.permissions", TriState.NOT_SET)
                 .executor((source, command, args) -> {
                     if (this.permissions.isEmpty()) {
                         source.sendMessage("No permissions received!");
