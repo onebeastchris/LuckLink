@@ -35,6 +35,7 @@ public class LuckLink implements Extension {
         } catch (ClassNotFoundException e) {
             logger().error("LuckPerms API not found! Disabling LuckLink.");
             disable();
+            return;
         }
 
         // Check: Is Geyser updated?
@@ -43,6 +44,7 @@ public class LuckLink implements Extension {
         } catch (ClassNotFoundException e) {
             logger().error("Geyser is not updated! Disabling LuckLink.");
             disable();
+            return;
         }
 
         // Load config
@@ -79,7 +81,6 @@ public class LuckLink implements Extension {
                 .description("Reloads the LuckLink config and re-collects all permissions.")
                 .permission("lucklink.reload", TriState.FALSE)
                 .bedrockOnly(false)
-                .executableOnConsole(true)
                 .source(CommandSource.class)
                 .executor((sender, command, args) -> {
                     // Load config
@@ -102,7 +103,6 @@ public class LuckLink implements Extension {
         event.register(Command.builder(this)
                 .name("permissions")
                 .aliases(Collections.singletonList("perms"))
-                .executableOnConsole(true)
                 .bedrockOnly(false)
                 .source(CommandSource.class)
                 .permission("lucklink.permissions", TriState.NOT_SET)
