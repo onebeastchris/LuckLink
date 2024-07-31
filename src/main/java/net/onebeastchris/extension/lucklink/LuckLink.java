@@ -24,16 +24,18 @@ public class LuckLink implements Extension {
     public void onPreInit(GeyserPreInitializeEvent event) {
         // Check: Using platform that doesn't need this extension
         PlatformType platformType = this.geyserApi().platformType();
-        if (platformType.equals(PlatformType.STANDALONE) || platformType.equals(PlatformType.SPIGOT)) {
+        if (!platformType.equals(PlatformType.BUNGEECORD) || platformType.equals(PlatformType.VELOCITY) ||
+                !platformType.equals(PlatformType.FABRIC)) {
             logger().warning("LuckLink is not needed on " + platformType.platformName() + ", since this platform registers permissions on its own.");
             disable();
+            return;
         }
 
         // Check: Is LuckPerms installed?
         try {
             Class.forName("net.luckperms.api.LuckPerms");
         } catch (ClassNotFoundException e) {
-            logger().error("LuckPerms API not found! Disabling LuckLink.");
+            logger().error("LuckPerms not found! Disabling LuckLink.");
             disable();
             return;
         }
@@ -60,6 +62,13 @@ public class LuckLink implements Extension {
         if (ConfigLoader.config == null) {
             logger().error("Config not loaded! Disabling LuckLink.");
             disable();
+            return;
+        }
+
+        if (ConfigLoader.config.getDefaultGroup().equals("CHANGEME")) {
+            logger().error("Default group not configured! Please open the lucklink config, and configure it. " +
+                    " Disabling LuckLink.");
+            this.disable();
             return;
         }
 

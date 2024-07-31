@@ -41,6 +41,11 @@ public class GeyserRegisterPermissionsEventImpl implements GeyserRegisterPermiss
 
     @Override
     public void register(String permission, TriState defaultValue) {
+        if (permission == null || defaultValue == null) {
+            logger.error("Permission (%s) or default value (%s) is null! These cannot be null. "
+                    .formatted(permission, defaultValue));
+            return;
+        }
 
         // Safety net in case no default group is found. Should never occur.
         if (group == null) return;
@@ -83,8 +88,8 @@ public class GeyserRegisterPermissionsEventImpl implements GeyserRegisterPermiss
                         permission, permissionValue));
             }
         } else {
-            logger.warning(String.format("Failed to register permission %s for %s group with default value %s",
-                    permission, group.getName(), defaultValue.name()));
+            logger.warning(String.format("Failed to register permission %s for %s group with default value %s. Got response: %s.",
+                    permission, group.getName(), defaultValue.name(), result.name()));
         }
 
         // Save the group to apply the changes

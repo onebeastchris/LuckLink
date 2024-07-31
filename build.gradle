@@ -15,10 +15,9 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'org.geysermc.geyser:api:2.3.0-SNAPSHOT'
-
-    // Necessary to properly use event firing; Geyser API currently includes 1.0. 1.1 changes firing behavior.
-    compileOnly 'org.geysermc.event:events:1.1-SNAPSHOT'
+    // geyser api
+    compileOnly 'org.geysermc.geyser:api:2.4.1-SNAPSHOT'
+    // luckperms api
     compileOnly 'net.luckperms:api:5.4'
 
     implementation('org.spongepowered:configurate-hocon:4.1.2')

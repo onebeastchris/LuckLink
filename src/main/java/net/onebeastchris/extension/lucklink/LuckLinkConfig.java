@@ -11,7 +11,7 @@ public final class LuckLinkConfig {
         The luckperms group to add the permissions to.
         By default, it is the luckperms default group.
         """)
-    private String defaultGroup = "default";
+    private String defaultGroup = "CHANGEME";
 
     @Comment("""
         If this is true, unset permissions (permissions that are not true or false) will be added to the default group as false.

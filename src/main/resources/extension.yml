@@ -1,6 +1,6 @@
 id: lucklink
 name: LuckLink
 main: net.onebeastchris.extension.lucklink.LuckLink
-api: 1.0.0
+api: 2.4.1
 version: 1.0.0
 authors: [onebeastchris]
