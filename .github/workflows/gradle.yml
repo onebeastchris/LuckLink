@@ -31,4 +31,4 @@ jobs:
           prerelease: false
           title: "Lucklink download"
           files: |
-            build/libs/lucklink-*.jar
+            build/libs/LuckLink.jar
