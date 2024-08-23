@@ -24,7 +24,7 @@ public class LuckLink implements Extension {
     public void onPreInit(GeyserPreInitializeEvent event) {
         // Check: Using platform that doesn't need this extension
         PlatformType platformType = this.geyserApi().platformType();
-        if (!platformType.equals(PlatformType.BUNGEECORD) || platformType.equals(PlatformType.VELOCITY) ||
+        if (!platformType.equals(PlatformType.BUNGEECORD) || !platformType.equals(PlatformType.VELOCITY) ||
                 !platformType.equals(PlatformType.FABRIC)) {
             logger().warning("LuckLink is not needed on " + platformType.platformName() + ", since this platform registers permissions on its own.");
             disable();
