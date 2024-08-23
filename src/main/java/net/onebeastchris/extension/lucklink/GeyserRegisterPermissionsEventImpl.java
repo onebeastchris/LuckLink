@@ -7,6 +7,7 @@ import net.luckperms.api.model.group.Group;
 import net.luckperms.api.node.NodeEqualityPredicate;
 import net.luckperms.api.node.types.PermissionNode;
 import net.luckperms.api.util.Tristate;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.geysermc.geyser.api.event.lifecycle.GeyserRegisterPermissionsEvent;
 import org.geysermc.geyser.api.util.TriState;
 
@@ -40,7 +41,8 @@ public class GeyserRegisterPermissionsEventImpl implements GeyserRegisterPermiss
     }
 
     @Override
-    public void register(String permission, TriState defaultValue) {
+    public void register(@NonNull String permission, @NonNull TriState defaultValue) {
+        //noinspection ConstantValue - enforcing api
         if (permission == null || defaultValue == null) {
             logger.error("Permission (%s) or default value (%s) is null! These cannot be null. "
                     .formatted(permission, defaultValue));

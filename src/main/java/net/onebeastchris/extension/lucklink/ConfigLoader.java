@@ -16,9 +16,7 @@ public class ConfigLoader {
                 extension.disable();
                 return;
             } else {
-                extension.logger().info("""
-                    Created data folder! Check out the config.conf file under /extensions/lucklink/ for LuckLink configuration options.
-                    """);
+                extension.logger().info("Created data folder! Check out the config.conf file under /extensions/lucklink/ for LuckLink configuration options.");
             }
         }
 

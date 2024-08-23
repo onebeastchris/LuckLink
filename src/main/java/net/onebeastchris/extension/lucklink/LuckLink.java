@@ -16,6 +16,9 @@ import java.util.*;
 
 public class LuckLink implements Extension {
 
+    private static final Set<PlatformType> SUPPORTED_PLATFORMS = Set.of(PlatformType.BUNGEECORD,
+            PlatformType.FABRIC, PlatformType.VELOCITY);
+
     public static ExtensionLogger logger;
 
     public Map<String, TriState> permissions = new HashMap<>();
@@ -24,8 +27,7 @@ public class LuckLink implements Extension {
     public void onPreInit(GeyserPreInitializeEvent event) {
         // Check: Using platform that doesn't need this extension
         PlatformType platformType = this.geyserApi().platformType();
-        if (!platformType.equals(PlatformType.BUNGEECORD) || !platformType.equals(PlatformType.VELOCITY) ||
-                !platformType.equals(PlatformType.FABRIC)) {
+        if (!SUPPORTED_PLATFORMS.contains(platformType)) {
             logger().warning("LuckLink is not needed on " + platformType.platformName() + ", since this platform registers permissions on its own.");
             disable();
             return;
@@ -66,8 +68,9 @@ public class LuckLink implements Extension {
         }
 
         if (ConfigLoader.config.getDefaultGroup().equals("CHANGEME")) {
-            logger().error("Default group not configured! Please open the lucklink config, and configure it. " +
-                    " Disabling LuckLink.");
+            logger().error("Default group not configured!");
+            logger().error("Please open the LuckLink config, and configure it.");
+            logger().error("Disabling LuckLink.");
             this.disable();
             return;
         }
