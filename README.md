@@ -4,15 +4,13 @@ This Geyser Extension allows you to automatically register permissions defined b
 or other Geyser extensions to Luckperms. This only needs to be done on platforms that do not have a native permission manager.
 These include Velocity, BungeeCord, and Fabric. Spigot/Paper, NeoForge, Geyser-Standalone and Geyser-ViaProxy have native permission managers.
 
-## This extensions only works with Geyser's build 631+
-
 ### Installation
 Download the latest .jar from the releases tab here, and place it in your Geyser's `extensions` folder.
 
 ### Configuration
-No configuration necessary. Just ensure that you have `Luckperms` installed on your server.
+The only required option is the "default-group" option. It can be set to "default" if you want permissions to be applied to all players.
 
-There are some configuration options though:
+Other options are:
 - `add-unset-permissions` : If true, all permissions that by default are not set would be registered as false. If false, they are ignored
 - `default-group`: The luckperms group to register permissions to. Can be the default luckperms group, or a custom one.
 - `log-permissions`: If set to true, all permissions that are registered will be logged to the console.
