@@ -27,14 +27,15 @@ jobs:
       - name: Release
         uses: GeyserMC/actions/release@master
         with:
-          files: | # Newline-separated list of files to upload with optional "label:" prefix
+          files: |
             build/libs/LuckLink-*.jar
-          appID: ${{ secrets.RELEASE_APP_ID }} # The ID of the GitHub App to manage the release system
-          appPrivateKey: ${{ secrets.RELEASE_APP_PK }} # The private key of the GitHub App in PEM format
+          appID: ${{ secrets.RELEASE_APP_ID }}
+          appPrivateKey: ${{ secrets.RELEASE_APP_PK }}
           saveMetadata: true
           releaseEnabled: true
           discordWebhook: ${{ secrets.DISCORD_WEBHOOK }}
           ghReleaseNotes: true
           releaseName: Build ${tagBase}
+          tagPrefix: release
           tagIncrement: true
           preRelease: false
