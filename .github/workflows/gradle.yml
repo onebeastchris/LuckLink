@@ -37,13 +37,4 @@ jobs:
           ghReleaseNotes: true
           releaseName: Build ${tagBase}
           tagIncrement: true
-
-      - name: Auto Release
-        uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          prerelease: false
-          title: "Lucklink download"
-          files: |
-            build/libs/*.jar
+          preRelease: false
