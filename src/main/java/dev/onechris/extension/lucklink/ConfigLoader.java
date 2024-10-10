@@ -1,4 +1,4 @@
-package net.onebeastchris.extension.lucklink;
+package dev.onechris.extension.lucklink;
 
 import org.geysermc.geyser.api.extension.Extension;
 import org.spongepowered.configurate.CommentedConfigurationNode;

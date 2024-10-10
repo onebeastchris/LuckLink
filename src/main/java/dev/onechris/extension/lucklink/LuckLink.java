@@ -1,4 +1,4 @@
-package net.onebeastchris.extension.lucklink;
+package dev.onechris.extension.lucklink;
 
 import org.geysermc.event.FireResult;
 import org.geysermc.event.subscribe.Subscribe;

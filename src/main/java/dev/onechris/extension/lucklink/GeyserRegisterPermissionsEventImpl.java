@@ -1,4 +1,4 @@
-package net.onebeastchris.extension.lucklink;
+package dev.onechris.extension.lucklink;
 
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
@@ -13,8 +13,6 @@ import org.geysermc.geyser.api.util.TriState;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static net.onebeastchris.extension.lucklink.LuckLink.logger;
 
 public class GeyserRegisterPermissionsEventImpl implements GeyserRegisterPermissionsEvent {
     private final LuckPerms luckperms;
@@ -34,9 +32,9 @@ public class GeyserRegisterPermissionsEventImpl implements GeyserRegisterPermiss
         this.luckperms = LuckPermsProvider.get();
         this.group = luckperms.getGroupManager().getGroup(ConfigLoader.config.getDefaultGroup());
         if (group == null) {
-            logger.warning("Unable to find the default group to add permissions!");
+            LuckLink.logger.warning("Unable to find the default group to add permissions!");
         } else {
-            if (debug) logger.info("Found default group " + group.getName());
+            if (debug) LuckLink.logger.info("Found default group " + group.getName());
         }
     }
 
@@ -44,7 +42,7 @@ public class GeyserRegisterPermissionsEventImpl implements GeyserRegisterPermiss
     public void register(@NonNull String permission, @NonNull TriState defaultValue) {
         //noinspection ConstantValue - enforcing api
         if (permission == null || defaultValue == null) {
-            logger.error("Permission (%s) or default value (%s) is null! These cannot be null. "
+            LuckLink.logger.error("Permission (%s) or default value (%s) is null! These cannot be null. "
                     .formatted(permission, defaultValue));
             return;
         }
@@ -52,7 +50,7 @@ public class GeyserRegisterPermissionsEventImpl implements GeyserRegisterPermiss
         // Safety net in case no default group is found. Should never occur.
         if (group == null) return;
 
-        if (debug) logger.info(String.format("[Debug] permission: %s, default value: %s, group: %s", permission, defaultValue.name(), group.getName()));
+        if (debug) LuckLink.logger.info(String.format("[Debug] permission: %s, default value: %s, group: %s", permission, defaultValue.name(), group.getName()));
 
         // For the permissions command
         permissions.put(permission, defaultValue);
@@ -61,7 +59,7 @@ public class GeyserRegisterPermissionsEventImpl implements GeyserRegisterPermiss
         if (value.equals(TriState.NOT_SET)) {
             if (addUnsetPermissions) {
                 value = TriState.FALSE;
-                if (debug) logger.info(String.format("[Debug] Default value was not set, setting permission %s to false", permission));
+                if (debug) LuckLink.logger.info(String.format("[Debug] Default value was not set, setting permission %s to false", permission));
             } else {
                 return;
             }
@@ -77,7 +75,7 @@ public class GeyserRegisterPermissionsEventImpl implements GeyserRegisterPermiss
         Tristate tristate = group.data().contains(node, NodeEqualityPredicate.ONLY_KEY);
         if (!tristate.equals(Tristate.UNDEFINED)) {
             // Permission already exists as either true/false; no need to add it
-            if (debug) logger.info(String.format("[Debug] Permission %s already exists with value %s", permission, tristate.name()));
+            if (debug) LuckLink.logger.info(String.format("[Debug] Permission %s already exists with value %s", permission, tristate.name()));
             return;
         }
 
@@ -86,11 +84,11 @@ public class GeyserRegisterPermissionsEventImpl implements GeyserRegisterPermiss
         if (result.wasSuccessful()) {
             if (logPermissions) {
                 String permissionValue = addUnsetPermissions && defaultValue.equals(TriState.NOT_SET) ? "FALSE (originally NOT_SET)" : defaultValue.name();
-                logger.info(String.format("Registered permission %s with value %s",
+                LuckLink.logger.info(String.format("Registered permission %s with value %s",
                         permission, permissionValue));
             }
         } else {
-            logger.warning(String.format("Failed to register permission %s for %s group with default value %s. Got response: %s.",
+            LuckLink.logger.warning(String.format("Failed to register permission %s for %s group with default value %s. Got response: %s.",
                     permission, group.getName(), defaultValue.name(), result.name()));
         }
 

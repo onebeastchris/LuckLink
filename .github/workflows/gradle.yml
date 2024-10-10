@@ -1,8 +1,9 @@
-name: Build
+name: Build and Release
 on:
   push:
     branches:
-      - "master"
+      - "main"
+
 jobs:
   build:
     name: Build
@@ -22,6 +23,20 @@ jobs:
 
       - name: Gradle Build
         run: gradle shadowJar
+
+      - name: Release
+        uses: GeyserMC/actions/release@master
+        with:
+          files: | # Newline-separated list of files to upload with optional "label:" prefix
+            build/libs/LuckLink-*.jar
+          appID: ${{ secrets.RELEASE_APP_ID }} # The ID of the GitHub App to manage the release system
+          appPrivateKey: ${{ secrets.RELEASE_APP_PK }} # The private key of the GitHub App in PEM format
+          saveMetadata: true
+          releaseEnabled: true
+          discordWebhook: ${{ secrets.DISCORD_WEBHOOK }}
+          ghReleaseNotes: true
+          releaseName: Build ${tagBase}
+          tagIncrement: true
 
       - name: Auto Release
         uses: "marvinpinto/action-automatic-releases@latest"

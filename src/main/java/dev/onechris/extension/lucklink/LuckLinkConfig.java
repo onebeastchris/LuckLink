@@ -1,4 +1,4 @@
-package net.onebeastchris.extension.lucklink;
+package dev.onechris.extension.lucklink;
 
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
 import org.spongepowered.configurate.objectmapping.meta.Comment;
