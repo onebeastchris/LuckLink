@@ -3,7 +3,7 @@ plugins {
     id 'com.gradleup.shadow' version '8.3.0'
 }
 
-group 'net.onebeastchris.extension'
+group 'dev.onechris.extension'
 version '1.0.1'
 
 repositories {
@@ -39,7 +39,7 @@ shadowJar {
     archiveBaseName.set('LuckLink')
     archiveClassifier.set('')
 
-    relocate 'org.spongepowered.configurate', 'net.onebeastchris.extension.lucklink.configurate'
-    relocate 'io.leangen.geantyref', 'net.onebeastchris.extension.lucklink.geantyref'
-    relocate 'com.typesafe.config', 'net.onebeastchris.extension.lucklink.typesafe.config'
+    relocate 'org.spongepowered.configurate', 'dev.onechris.extension.lucklink.configurate'
+    relocate 'io.leangen.geantyref', 'dev.onechris.extension.lucklink.geantyref'
+    relocate 'com.typesafe.config', 'dev.onechris.extension.lucklink.typesafe.config'
 }
